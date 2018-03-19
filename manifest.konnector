@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "name": "Categorization",
+  "type": "node",
+  "slug": "categorization",
+  "description": "Retrieve user's bank operations to send them to our categorization AI algorythm",
+  "source": "git://github.com/konnectors/cozy-konnector-thename.git",
+  "locales": {
+    "fr": {
+      "permissions": {
+        "books": {
+          "description": "Utilisé pour sauvegarder les références de vos livres"
+        },
+        "files": {
+          "description": "Utilisé pour sauvegarder les couvertures de vos livres"
+        },
+        "accounts": {
+          "description": "Utilisé pour récupérer les informations de votre compte"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "bank.operations": {
+      "description": "Used to retrieve your bank operations",
+      "type": "io.cozy.bank.operations",
+      "verbs": ["GET"]
+    },
+    "bank.settings": {
+      "description": "gnagna",
+      "type": "io.cozy.bank.settings",
+      "verbs": ["GET", "PUT"]
+    },
+    "accounts": {
+      "description": "Required to get the account's data",
+      "type": "io.cozy.accounts",
+      "verbs": ["GET"]
+    }
+  },
+  "developer": {
+    "name": "cozy",
+    "url": "cozy.io"
+  }
+}
