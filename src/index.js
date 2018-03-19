@@ -2,7 +2,8 @@
 
 const {
   BaseKonnector,
-  cozyClient
+  cozyClient,
+  log
 } = require('cozy-konnector-libs')
 
 module.exports = new BaseKonnector(start)
@@ -21,9 +22,10 @@ async function start() {
   await updateLastSeq(settings, newLastSeq)
 
   if (transactions.length > 0) {
-    sendData(transactions)
+    log('info', `Sending ${transactions.length} transactions...`)
+    return sendData(transactions)
   } else {
-    console.log('No transaction to send')
+    log('info', 'No transaction to send')
   }
 }
 
@@ -67,15 +69,23 @@ async function updateLastSeq(settings, lastSeq) {
 }
 
 function sendData(transactions) {
+  const body = JSON.stringify(transactions)
+
   const options = {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
     },
-    body: JSON.stringify(transactions)
+    body
   }
 
   return fetch(API_URL, options)
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
+    .then(response => {
+      if (response.status === 200) {
+        log('info', `${transactions.length} transactions sent`)
+      } else {
+        log('error', `Error ${response.status} : ${response.statusText} while sending the following data:\n${body}`)
+      }
+    })
+    .catch(err => log('error', err))
 }
