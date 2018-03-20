@@ -19,11 +19,12 @@ async function start() {
     lastSeq: newLastSeq
   } = await getTransactionsChanges(lastSeq)
 
-  await updateLastSeq(settings, newLastSeq)
-
   if (transactions.length > 0) {
     log('info', `Sending ${transactions.length} transactions...`)
     return sendData(transactions)
+      .then(() => log('info', `${transactions.length} transactions sent`))
+      .then(() => updateLastSeq(settings, newLastSeq))
+      .catch(err => log('error', err))
   } else {
     log('info', 'No transaction to send')
   }
@@ -82,10 +83,9 @@ function sendData(transactions) {
   return fetch(API_URL, options)
     .then(response => {
       if (response.status === 200) {
-        log('info', `${transactions.length} transactions sent`)
+        return Promise.resolve()
       } else {
-        log('error', `Error ${response.status} : ${response.statusText} while sending the following data:\n${body}`)
+        return Promise.reject(new Error(`Error ${response.status} : ${response.statusText} while sending the following data:\n${body}`))
       }
     })
-    .catch(err => log('error', err))
 }
