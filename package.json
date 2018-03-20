@@ -1,10 +1,10 @@
 {
-  "name": "cozy-konnector-template",
+  "name": "cozy-konnector-bank-categorization",
   "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/konnectors/cozy-konnector-template.git"
+    "url": "git+https://github.com/konnectors/cozy-konnector-bank-categorization.git"
   },
   "keywords": [],
   "author": "",
@@ -30,8 +30,8 @@
     "format": "prettier --write '**/*.{js,json}'",
     "precommit": "yarn lint",
     "lint": "eslint .",
-    "deploy": "git-directory-deploy --directory build/ --branch build --repo=${DEPLOY_REPOSITORY:-https://$GITHUB_TOKEN@github.com/konnectors/cozy-konnector-template.git}",
-    "deploy:prod": "git-directory-deploy --directory build/ --branch latest --repo=${DEPLOY_REPOSITORY:-https://$GITHUB_TOKEN@github.com/konnectors/cozy-konnector-template.git}"
+    "deploy": "git-directory-deploy --directory build/ --branch build --repo=${DEPLOY_REPOSITORY:-https://$GITHUB_TOKEN@github.com/konnectors/cozy-konnector-bank-categorization.git}",
+    "deploy:prod": "git-directory-deploy --directory build/ --branch latest --repo=${DEPLOY_REPOSITORY:-https://$GITHUB_TOKEN@github.com/konnectors/cozy-konnector-bank-categorization.git}"
   },
   "dependencies": {
     "cozy-konnector-libs": "^3.0.0"
